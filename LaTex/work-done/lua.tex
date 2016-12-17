@@ -1,0 +1,46 @@
+Das Programm ist in vier Lua-Skripten implementiert.\\
+Durch die Konfigurationsvariablen, die in \textit{config.lua} hinterlegt sind, werden die verschiedenen Parameter des Programms festgelegt:
+\begin{center}
+\begin{tabular}{|l|l|}
+     \hline
+     \textbf{Variable} & \textbf{Bedeutung} \\ \hline \hline
+     KeepVideoDays & Videodateien werden nach dieser Anzahl Tage gel\"oscht.  \\ \hline
+     MySQLDBHostName & Hostname des Datenbank-Servers \\ \hline
+     MySQLDBHostPort & Host-Port des Datenbank-Servers \\ \hline
+     MySQLDBUserName & Zu verwendender Datenbank-Nutzer \\ \hline
+     MySQLDBUserPassword & Passwort f\"ur den Datenbank-Nutzer \\ \hline
+     RecordStopDelay & Die Aufnahme l\"auft f\"ur diese Anzahl Sekunden nach. \\ \hline
+     SensorInputPin & An diesem Pin liegt das Schaltsignal des Sensors an. \\ \hline
+     VideoCaptureFramerate & Das Video wird mit dieser Bildwiederholrate aufgenommen. \\ \hline
+     VideoCaptureHeight & Pixelh\"ohe des Videos \\ \hline
+     VideoCaptureWidth & Pixebreite des Videos \\ \hline
+     VideoDeviceMount & Linux Device File der Kamera \\ \hline
+     VideoDeviceStream & Der aufzunehmende Stream der Kamera. \\ \hline
+     VideoOutputDir & Das Video wird in diesem Pfad gespeichert. \\ \hline
+\end{tabular}
+\end{center}
+Diese Variablen sind für alle anderen Lua-Skripte sichtbar.\\
+Die Kamera muss die gew\"ahlten Parameter unterst\"utzen, ansonsten f\"allt die Aufnahme auf die Standardwerte des VLC Players zur\"uck.\\
+
+Das Skript \textit{init.lua} wird beim Start des Programms einmalig ausgef\"uhrt und initialisiert zuerst das luaposix-Modul zur weiteren Benutzung. Anschlie{\ss}end wird das LuaSQL-Modul initialisert und eine Verbindung zur Datenbank aufgebaut. Au{\ss}erdem wird die GPIO-Schnittstelle initialisiert und so konfiguriert, dass vom festgelegten Pin das Signal des Sensors gelesen werden kann.\\
+
+Die Kernfunktionalit\"at des Programms ist in \textit{record.lua} definiert.
+Das Programm l\"auft in einer Endlosschleife; zum Beenden gen\"ugt es,  ein SIGINT-Signal an den Prozess zu senden\footnote{Selber Effekt wie  die  Tastenkombination Ctrl-C im Terminal}. Der Ablauf eines Schleifen-Durchlaufs wird im folgenden beschrieben.\\
+\\
+Zun\"achst wird der Zustand des Sensors (1-ge\"offnet, 0-geschlossen) abgefragt und gespeichert, der vorherige Zustand wird in einer anderen Variable behalten. Au{\ss}erdem werden Systemzeit und Datum tempor\"ar gespeichert - diese werden im sp\"ateren Verlauf ben\"otigt.
+Als n\"achstes werden abh\"angig vom Sensor-Zustand verschiedene Aktionen durchgef\"uhrt.\\
+\\
+Ist der Zustand des Sensors '1' und der vorherige Zustand war nicht '1' (das bedeutet, die T\"ur wurde ge\"offnet), ist der Ablauf wie folgt:
+Wenn die Aufnahme nicht noch vom letzten T\"ur-\"Offnen l\"auft, wird eine neue Aufnahme gestartet. Dazu wird mit der POSIX-Standardfunktion fork() ein neuer Prozess erstellt und eine Instanz des VLC-Players geladen, welche eine neue Video-Datei im konfigurierten Verzeichnis erstellt. Der Dateiname der Aufnahme setzt sich dabei einfach zusammen aus Datum und Uhrzeit des Aufnahmestarts (hat also das Format 'yyyy-mm-dd-HHMMSS'.mp4).
+Falls die Aufnahme noch nachl\"auft, wenn die T\"ur ge\"offnet wird, wird die laufende Aufnahme fortgesetzt, der Aufnahmestopp-Timer wird angehalten.
+In jedem Fall wird daraufhin ein neuer Datenbank-Eintrag mit Zeitstempel und Video-Dateiname erstellt.\\
+\\
+Ist der Zustand des Sensors '0' und der vorherige Zustand war nicht '0' (die T\"ur wurde geschlossen), geschieht folgendes:
+Vorausgesetzt, dass die Aufnahme l\"auft (was normalerweise der Fall sein sollte), wird oben ew\"ahnter Timer gestartet, der f\"ur das Nachlaufen der Aufnahme um die konfigurierte Anzahl Sekunden zust\"andig ist.\\
+\\
+Am Ende der Schleife wird noch der Timer aktualisiert, falls er l\"auft.
+Wenn der Timer die eingestellte Nachlaufzeit \"uberschritten hat, wird die Aufnahme durch das senden eines Interrupt-Signals an den VLC Player gestoppt.\\
+\\
+
+Eine Routine zum L\"oschen alter Video-Dateien ist in \textit{dbclean.lua} implementiert. Dabei wird die Datenbank nach Eintr\"agen durchsucht, die \"alter sind als die eingestellte Anzahl Tage. Anschlie{\ss}end werden die referenzierten Video-Dateien gel\"oscht und die Eintr\"age mit dem Wert NULL als Video-Dateiname aktualisiert. Dadurch erkennt das Web-Interface, dass das Video gel\"oscht wurde.
+\vspace{1.5cm}

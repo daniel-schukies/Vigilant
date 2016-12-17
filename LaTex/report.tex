@@ -1,0 +1,50 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[pdftex]{graphicx}
+\usepackage{fontspec}
+\usepackage{inconsolata}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{url}
+\usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, urlcolor=cyan, citecolor=black, anchorcolor=black]{hyperref} 
+
+\lstset{
+    basicstyle=\fontsize{8}{10}\selectfont\ttfamily,
+    tabsize=4,
+    keywordstyle=\color{blue}\selectfont\ttfamily,
+    stringstyle=\color{BrickRed}\selectfont\ttfamily,
+    commentstyle=\color{ForestGreen}\selectfont\ttfamily,
+    showstringspaces=false,
+    showtabs=false,
+}
+
+
+\begin{document}
+
+\renewcommand\bibname{Quellenverzeichnis} 
+\renewcommand{\contentsname}{Inhalt}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\renewcommand{\chaptername}{Kapitel}
+\renewcommand{\figurename}{Abbildung}
+
+
+\input{title}
+\input{certificate}
+\pagenumbering{roman} 
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic} 
+
+\input{work-done/einleitung} 
+\input{work-done/grundlagen}
+
+\input{work-done/anforderungsanalyse}
+\input{work-done/marktanalyse}
+\input{work-done/implementierung}
+\input{work-done/evaluation}
+\input{work-done/anhang}
+\input{ref}
+\listoffigures
+
+\end{document}

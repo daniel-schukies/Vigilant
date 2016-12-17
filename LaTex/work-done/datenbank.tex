@@ -1,0 +1,39 @@
+Die Datenbank muss folgende Informationen \"uber eine Aufnahme speichern:
+\begin{itemize}
+    \item Datum der Aufnahme
+    \item Genaue Uhrzeit zu Beginn der Augnahme
+    \item Dateiname des Videos (um es sp\"ater anzeigen zu k\"onnen)
+\end{itemize}
+\vspace{0.5cm}
+Daraus ergibt sich ein recht simples Tabellenformat:\\
+
+\begin{lstlisting}[language=SQL,caption={Auszug aus dbRecords.sql},numbers=left,frame=lrbt]
+CREATE TABLE Records (
+    EntryID INTEGER UNIQUE NOT NULL AUTO_INCREMENT,
+    RecordDateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    VideoPath VARCHAR(4096) DEFAULT NULL,
+    PRIMARY KEY (EntryID)
+)  CHARSET=UTF8;
+\end{lstlisting}
+\vspace{0.5cm}
+Datum und Uhrzeit der Aufnahme werden in RecordDateTime gespeichert.
+Der Datentyp TIMESTAMP hat das Format 'yyyy-mm-dd HH:MM:SS'.
+Der Dateiname des Videos wird in der Variable VideoPath gespeichert (wider der Namengebung wird tats\"achlich nur der Name der Datei gespeichert; der Pfad zu den Videodateien ist dem Webdienst bekannt).\\
+\\
+Weiterhin wird ein SQL-Nutzer mit ausreichenden Privilegien ben\"otigt.\\
+\begin{lstlisting}[language=SQL,caption={Anlegen des Datenbank-Nutzers},numbers=left,frame=lrbt]
+CREATE USER 'phpwebuser'@'localhost'
+    IDENTIFIED BY 'secure_password';
+\end{lstlisting}
+\vspace{0.5cm}
+Der Nutzer muss in diesem Szenario nur lokal erreichbar sein.
+Skript und Webdienst m\"ussen sp\"ater Eintr\"age lesen, schreiben, ver\"andern und l\"oschen k\"onnen. Es werden also entsprechend Rechte vergeben:\\
+\newpage
+\begin{lstlisting}[language=SQL,caption={Die Rechte des Datenbank-Nutzers},numbers=left,frame=lrbt]
+GRANT USAGE,SELECT,INSERT,UPDATE,DELETE 
+    ON Records.* 
+    TO 'phpwebuser'@localhost';
+\end{lstlisting}
+\vspace{0.5cm}
+Die Datenbank ist nun einsatzbereit.
+\vspace{1.5cm}

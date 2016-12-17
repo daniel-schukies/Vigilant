@@ -1,0 +1,12 @@
+[Unit]
+Description=Lua record script service
+Requires=mysql.service
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/vigilant/
+ExecStart=/usr/bin/lua5.1 record.lua
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multiuser.target

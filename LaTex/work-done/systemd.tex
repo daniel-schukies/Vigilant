@@ -1,0 +1,17 @@
+Damit \textit{dbclean.lua} automatisch in regelm\"a{\ss}igen Abst\"anden aufgerufen wird, existieren ein systemd-Skript \textit{dbclean.service} und ein systemd-Timer \textit{dbclean.timer}. Die systemd-Units haben den Vorteil, dass durch sie die Lua-Skripte  einfach und schnell aktiviert und deaktiviert werden k\"onnen. Wenn der Timer aktiviert ist, ruft er \textit{dbclean.lua} in regelm\"a{\ss}igen Abst\"anden auf (konfiguriert ist t\"aglich um 00:00 Uhr).\\
+\\
+Au{\ss}erdem existiert noch eine Unit \textit{record.service}, welche verwendet wird, um \textit{record.lua} im Hintergrund auszuf\"uhren und zu steuern.\\
+
+\begin{lstlisting}[caption={Ein systemd-Timer hat eine relativ einfache Struktur.},numbers=left,frame=lrbt]
+[Unit]
+Description=Lua clean script timer
+Requires=mysql.service
+
+[Timer]
+OnCalendar=daily
+Unit=dbclean.service
+
+[Install]
+WantedBy=multi-user.target
+\end{lstlisting}
+\vspace{1.5cm}

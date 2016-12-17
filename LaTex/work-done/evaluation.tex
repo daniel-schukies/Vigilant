@@ -1,0 +1,27 @@
+\chapter{Evaluation}
+
+Im folgenden wird festgestellt, welche Projektziele erfolgreich umgesetzt wurden, und welche angepasst oder ausgeschlossen werden mussten.\\
+\\
+Das System zeichnet die Aufnahmen autonom auf. Der Magnetschalter wurde erfolgreich eingesetzt. Die Aufzeichnung beginnt kurz nach dem Betätigen des Magnet-Schalters.\\
+Während die Tür offen ist, läuft die Aufnahme weiter. Wird die Tür geschlossen und innerhalb der Nachlaufzeit wieder geöffnet, läuft die Aufnahme weiter. Bleibt die Tür über die Nachlaufzeit geschlossen, wird die Aufnahme beendet.\\
+Für jedes Öffnen der Tür wird ein Datenbank-Eintrag mit Datum, Uhrzeit und Video-Datei geschrieben. Videos, deren Alter eine bestimmte Anzahl an Tagen überschritten hat, werden gelöscht.\\
+Über das Web-Interface lassen sich alle Einträge mit zugehörigem Video(falls vorhanden) anzeigen. Es wird außerdem eine Option zum Löschen der alten Einträge (Einträge ohne Video) bereitgestellt.\\
+\\
+Das Web-Interface wurde zudem in eine Projekt-Website eingebettet. Die Projekt-Website kann zur Demonstration im Internet veröffentlicht werden.
+
+\vspace{1.0cm}
+
+\section{Fazit}
+
+Alle Projektziele wurden erfolgreich umgesetzt.\\
+\\
+Durch das Projekt wurde gezeigt, dass es möglich ist, Videoüberwachung eines oder mehrerer Gebäude-Zugänge kostengünstig und mit wenig Aufwand zu realisieren.\\
+Mögliche Einsatz-Szenarien sind letztendlich abhängig von der Robustheit der Hardware-Installation; der entwickelte Prototyp dient zu Deonstrations-Zwecken und wurde in dieser Absicht angefertigt.\\
+\\
+Die Zusatzpunkte aus \ref{sec:kann} wurden für nicht ausschlaggebend befunden und daher weggelassen.
+
+\vspace{1.0cm}
+
+\section{Ausblick}
+
+Das Projekt wird über Github anderen Entwicklern zur Verfügung gestellt. Zudem gibt es eine Website\footnote{\href{https://schukies.io}{schukies.io/vigilant}} zur Veranschaulichung mit einer Demo des Webinterfaces. Somit könnte es in Zukunft andere Projekte geben, die auf diesem aufbauen oder es erweitern.

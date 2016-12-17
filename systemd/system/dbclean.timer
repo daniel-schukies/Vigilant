@@ -1,0 +1,10 @@
+[Unit]
+Description=Lua clean script timer
+Requires=mysql.service
+
+[Timer]
+OnCalendar=daily
+Unit=dbclean.service
+
+[Install]
+WantedBy=multi-user.target

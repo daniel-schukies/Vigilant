@@ -1,0 +1,49 @@
+\chapter{Grundlagen}
+
+\section{Raspberry Pi}
+Der Raspberry Pi ist ein Einplatinencomputer im Smartcard-Format. Er ist dank seiner geringen Größe sehr komfortabel platzierbar und benötigt keine weiteren Montage-Maßnahmen. Der Raspberry Pi ist sehr beliebt für experimentelle Projekte.\\
+\\
+Die Dokumentation des Raspberry Pi sowie Community-Inhalte sind verfügbar unter \href{https://www.raspberrypi.org/}{https://www.raspberrypi.org/}
+\vspace{1.0cm}
+
+\section{GPIO}
+GPIO (\textbf{G}eneral \textbf{P}urpose \textbf{I}nput/\textbf{O}utput) ist eine Schnittstelle, deren Verhalten durch Programmierung frei bestimmt werden kann. Es können einzelne Pins wahlweise als Eingang(zum Lesen) oder Ausgang( High- oder Low- Signal) definiert werden. Ist ein Pin als Eingang konfiguriert, und es liegt kein Signal an, befindet sich der Eingang in einem hochohmigen Zustand(Tri-State). Das bedeutet, dass der Eingang weder High noch Low ist. Die Pegelspannung beim Raspberry Pi beträgt ungefähr +1V (Low)\footnote{Erfahrungswert} und +3.3V (High).
+\vspace{1.0cm}
+
+\section{Reed-Kontakt}
+Reed-Kontakte (Reed-Relais) sind ferromagnetische Sensoren, die in Anwesenheit eines Magnetfelds einen elektrischen Strom schalten.\\
+Diese Art won Sensorik eignet sich gut zur Erkennung mechanischer Prozesse (wie beispielsweise das Öffnen einer Tür).
+\vspace{1.0cm}
+
+\section{Apache HTTPD}
+Der Apache HTTP Server ist der open-source Webserver der Apache Software Foundation. Der Server ist durch viele Module in seiner Funktion erweiterbar.\\
+\\
+Das Projekt ist unter \url{https://httpd.apache.org} gehostet.
+\vspace{1.0cm}
+
+\section{PHP}
+PHP ist eine serverseitige Skriptsprache zur Generierung von dynamischen Webinhalten. Über PHP können zum Beispiel Einträge aus  Datenbanken gelesen und in Websites eingebunden werden. Außerdem kann mit PHP objektorientiert programmiert werden.\\
+\\
+Dokumentation und weitere Informationen sind auf der Projektseite (\url{https://secure.php.net}) verfügbar.
+\vspace{1.0cm}
+
+
+
+\section{MariaDB/MySQL}
+MySQL\footnote{\url{https://www.mysql.com}} ist ein open-source Datenbanksystem, das von der Oracle Corporation sowohl unter der GPL\footnote{General Public License, \url{https://www.gnu.org/licenses/gpl.html}}, als auch kommerziell lizenziert erhältlich ist.\\
+Ein Fork von MySQL ist MariaDB, der als Datenbank-Kern die Speicher-Engine \textit{Aria} verwendet. Die Vorteile dieser Engine sind unter anderem erhöhte Stabilität und Geschwindigkeit\footnote{\url{https://mariadb.com/resources/blog/why-should-you-migrate-mysql-mariadb}}.\\
+\\
+Die Projektseite ist \url{https://mariadb.org}
+\vspace{1.0cm}
+
+
+\section{Lua}
+Für den Großteil der Programm-Implementierung wird Lua\footnote{\url{https://www.lua.org/}} verwendet.
+Lua ist eine platformunabhängige Skriptsprache, deren Installation üblicherweise nur einen schlanken Interpreter mitbringt. Wegen der hohen Performance, der geringen Installationsgröße und dem modularen Aufbau wird Lua oft im Embedded-Umfeld mit begrenzten Ressourcen eingesetzt.
+\vspace{1.0cm}
+
+\section{systemd}
+systemd (system daemon) ist ein Programm zur Service-Verwaltung auf Linux-Systemen, welches als init-Prozess (PID 1) gestartet wird und weitere Hintergrundprozesse verwaltet. Es löst damit das alte SysVinit\footnote{\url{https://savannah.nongnu.org/projects/sysvinit}}-System ab. Einige große Distributionen wie Debian und Arch Linux haben systemd standardmäßig integriert.\\
+\\
+systemd auf freedesktop.org: \url{https://wiki.freedesktop.org/www/Software/systemd}
+\newpage

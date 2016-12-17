@@ -1,0 +1,26 @@
+\subsubsection{LAMP}
+F\"ur das Web-Interface wird ein LAMP\footnote{LAMP(Linux-Apache-MySQL-PHP) ist ein gängiges Server-Setup}-Server ben\"otigt.\\
+Installiert werden:
+\begin{itemize}
+    \item Apache HTTP Server Version 2.4
+    \item PHP 5.6.28
+    \item MariaDB Server 10.0
+\end{itemize}
+\vspace{0.5cm}
+\subsubsection{VLC Media Player}
+Der VLC Media Player\footnote{Projektseite: \url{https://www.videolan.org/vlc/}} bietet eine komfortable M\"oglichkeit, Video-Ger\"ate \"uber den Video4Linux-Treiber (V4L) anzusprechen und deren Video-Stream in einem Video-Container zu speichern. Installiert wird nur das Kommandozeilen-Frontend - die grafische Oberfl\"ache wird nicht ben\"otigt.
+\\
+\subsubsection{Lua}
+Installiert wird aus Kompatibilit\"atsgr\"unden Lua 5.1\footnote{Aktuelle Version ist 5.3, Debian-Repository-Version ist 5.2}.\\
+\\
+Au{\ss}erdem sind noch einige Module, die Zusatz-Funktionen bereitstellen, erforderlich.\\
+\\
+Folgende Module werden installiert:
+
+\begin{itemize}
+    \item LuaSQL 2.3 (Datenbank-Adapter)
+    \item luaposix 33.4.0 (erm\"oglicht Nutzung einiger POSIX-Funktionen)
+    \item bit32 5.3 (Bitmanipulationen, ben\"otigt von luaposix)
+\end{itemize}
+
+\newpage

@@ -1,0 +1,36 @@
+\chapter{Anforderungsanalyse}
+
+\section{Priorisierung}
+
+\subsection{Muss}
+\begin{itemize}
+    \item Der Zustand der T\"ur (Offen/Zu) wird von einem Magnetschalter erfasst, welcher \"uber die GPIO-Schnitstelle mit dem Raspberry Pi verbunden ist.
+    \item Die Kamera ist \"uber USB mit dem Raspberry Pi verbunden.
+    \item Das System kann per WLAN \"uber einen USB-Adapter mit dem Netzwerk verbunden werden, um Installationen ohne Ehternet-Schnittstelle zu erm\"oglichen.
+    \item Die Kamera muss so positioniert werden, dass das Gesicht der Person, die durch die T\"ur tritt, erkennbar ist.
+    \item Die Kabel m\"ussen lang genug sein, um das System auch an gr\"o{\ss}eren Zug\"angen installieren zu k\"onnen.
+    \item Auf der Hardware muss ein LAMP-Server sowie ein Datenbank-Server lauff\"ahig sein.
+\end{itemize}
+
+\subsection{Soll}
+\begin{itemize}
+    \item Magnet und Magnetschalter m\"ussen so an der T\"ur anbringbar sein, dass man den Mechanismus nicht umgehen kann.
+    \item Das System soll stabil genug laufen, um im Dauermodus betrieben werden zu k\"onnen.
+    \item Der Datenbank-Eintrag soll zu Beginn der Aufnahme geschrieben werden, damit wenigstens die Zeiterfassung funktioniert (falls Kamera ausf\"allt).
+    \item Ein systemd-Service startet das Script zum Systemstart und initialisiert die Hardware.
+    \item Ein systemd-Timer durchsucht im definierten Zeit-Intervall die Datenbank nach Eintr\"agen, die die definierte Speicherungszeit \"uberschritten haben, und entfernt die Video-Dateien. Die Datenbank-Eintr\"age bleiben bestehen; diese werden \"uber das Web-Interface gel\"oscht.
+    \item Button zum L\"oschen aller alten Logeintr\"age in der Datenbank.
+\end{itemize}
+
+\subsection{Kann}
+\label{sec:kann}
+\begin{itemize}
+    \item Aktivierung des Systems durch T\"urklingel
+    \item Platzierung der Kamera auf Motorplatte zur Erweiterung des \"Uberwachungsbreichs
+    \item Unterst\"utzung f\"ur dedizierte Datenbank-Server/Videospeicher
+    \item Ton-Aufzeichnung
+    \item Gesichtserkennung von eingehenden Personen
+    \item Live-Stream der Kamera \"uber Web-Interface
+\end{itemize}
+
+\newpage

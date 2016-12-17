@@ -1,0 +1,11 @@
+[Unit]
+Description=Lua cleanup script service
+Requires=mysql.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/etc/vigilant/
+ExecStart=/usr/bin/lua5.1 dbclean.lua
+
+[Install]
+WantedBy=multiuser.target
